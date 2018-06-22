@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="KO">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Template</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+<link rel="stylesheet" media="all and (min-width:961px)" href="./static/full_screen.css" />
+<link rel="stylesheet" media="all and (max-width:960px)" href="./static/harf_screen.css" />
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+      <div id="header" class="col-md-12">
+		<header class="text-white">
+		  <a href="#">MARU Developer</a>
+		</header>
+		<a id="git-link" href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="row">
+      <div id="nav">
+	  	  <nav class="text-white">
+			<img id='face-img' class="img-thumbnail rounded-circle" src="./static/face_img_160.png">
+			<ul>
+				<li>
+				  <a href="#">Introduction</a>
+				</li>
+				<!-- 프레지 API -->
+				<!-- 포트폴리오 취지 : 여태 배운 내용을 다시 정리 -->
+				<!-- 사용한 개발 환경 및 도구 -->
+				<!-- 포트폴리오에 사용된 각종 라이브러리 열거 -->
+				<li>
+				  <a href="#">Passport & Mysql</a>
+				</li>
+				<!--로그인 로컬&페이스북-->
+				<!--비로그인 상태에서 열람 가능-->
+				<!--댓글 테이블 따로 생성-->
+				<!--게시글 지우기에서 트랜잭션 적용-->
+				<!-- 핵심 코드 열거 -->
+				<li>
+				  <a href="#">GoogleMap API & MongoDB</a>
+				</li>
+				<!-- 핵심 코드 열거 -->
+				<li>
+				  <a href="#">VUE & socket.io</a>
+				</li>
+				<!-- none SSR mode -->
+				<!-- 1:1 / 그룹 채팅 기능 -->
+				<!-- 접속자 확인 메커니즘 확인 -->
+				<!-- 핵심 코드 열거 -->
+				<li>
+				  <a href="#">VUE & NUXT</a>
+				</li>
+				<!-- 핵심 코드 열거 -->
+			</ul>
+			<footer>
+			  <p>
+			    Copyright 2018. Maru Developer. All rights reserved.<br>
+			    Business E-mail : c.moon9@outlook.com<br>
+			    Blog : <a href="http://www.maruware.co.kr/">www.maruware.co.kr</a>(SM-카테고리 참조)
+			  </p>
+		    </footer>
+		</nav>
+	  </div>
+	  
+      <div id="section" class="col">
+		<section>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+			<h1>전시할 내용</h1><br>
+		</section>
+	  </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var isChanged=false;
+
+	if($(window).outerWidth()<=960){
+		isChanged=true;
+		changeScreenHarf();
+	}
+
+	$(window).resize(function() {
+		if($(window).outerWidth()<=960){
+		
+			if(isChanged===false){
+				isChanged=true;
+				changeScreenHarf();
+			}
+		}else{
+			if(isChanged===true){
+				isChanged=false;
+				restoreScreen();
+			}
+		}
+	});
+});
+
+function changeScreenHarf(){
+	$("#header").append(`<div id='dropdown' class='dropdown'>
+							<button class='btn btn-primary dropdown-toggle' data-toggle="dropdown" style='background-color:rgba(255,255,255,0) ; border:1px solid rgba(255,255,255,0)'>
+								<img class='rounded-circle' id='toggle-img' src='./static/face_img_160.png'>
+							</button>
+							<div class='dropdown-menu dropdown-menu-right'>
+								<a class='dropdown-item' href='#'>Introduction</a>
+								<a class='dropdown-item' href='#'>Passport & Mysql</a>
+								<a class='dropdown-item' href='#'>GoogleMap API & MongoDB</a>
+								<a class='dropdown-item' href='#'>VUE & socket.io</a>
+								<a class='dropdown-item' href='#'>VUE & NUXT</a>
+							</div>
+						</div>`);
+	$(".dropdown-toggle").dropdown("toggle");
+
+}
+
+function restoreScreen(){
+	$("#dropdown").remove();
+}
+</script>
+
+
+</body>
+</html>
+
