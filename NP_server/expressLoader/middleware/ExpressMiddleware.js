@@ -1,7 +1,10 @@
 //각 미들웨어 require
 middlewares = {
+    static: require('./static'),
+    bodyParser: require('./bodyParser'),
+    session: require('./session'),
+
     router: require('./router/router'),
-    static: require('./static')
 }
 
 module.exports = function(app) {

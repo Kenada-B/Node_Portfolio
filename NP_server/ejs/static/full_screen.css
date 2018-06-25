@@ -1,63 +1,96 @@
 @charset "utf-8";
-
 * {
     margin: 0;
-	padding: 0;
-	font-family: 'Titillium Web', sans-serif;
+    padding: 0;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 #header {
-	height: 55px;
-	background:linear-gradient(to bottom, #665089, #563d7c, #4d366f);
-}
-#header > header {
-	position: absolute;
-	left:30px;
-	font-size:220%;
-}
-#header > #git-link {
-	position: absolute;
-	left : 95%;
-	font-size:220%;
+    height: 55px;
+    background: linear-gradient(to bottom, #665089, #563d7c, #4d366f);
 }
 
-#header a:link {text-decoration: none;color:white;}
-#header a:visited {text-decoration: none;color:white;}
-#header a:active {text-decoration: none; color:#0080FF;}
-#header a:hover {text-decoration: none; color:#0080FF;}
-
-#nav{
-	width: 325px;
-	min-height : 94vh;
-	background-color:#563d7c;
-}
-#nav > nav{
-	position: fixed;
-	left:30px;
-	top:18%;
-	text-align: center;
-	font-size:20px;
-}
-#nav > nav > img{
-	margin-bottom:25%;
-}
-#nav > nav > ul{
-	list-style: none;
-}
-#nav > nav > ul > li{
-	margin-bottom:8%;
+#header>header {
+    position: absolute;
+    left: 30px;
+    font-size: 220%;
 }
 
-#nav > nav > footer > p{
-	margin-top:25%;
-	font-size:12px
+#header>#git-link {
+    position: absolute;
+    left: 95%;
+    font-size: 220%;
 }
 
-#nav > nav a:link {text-decoration: none; color:white;}
-#nav > nav a:visited {text-decoration: none;color:white;}
-#nav > nav a:active {text-decoration: none; color:#0080FF;}
-#nav > nav a:hover {text-decoration: none; color:#0080FF;}
-
-#section{
-	
+#header a:link {
+    text-decoration: none;
+    color: white;
 }
+
+#header a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+#header a:active {
+    text-decoration: none;
+    color: #0080FF;
+}
+
+#header a:hover {
+    text-decoration: none;
+    color: #0080FF;
+}
+
+#nav {
+    width: 325px;
+    min-height: 94.2vh;
+    background-color: #563d7c;
+}
+
+#nav>nav {
+    position: fixed;
+    left: 30px;
+    top: 18%;
+    text-align: center;
+    font-size: 20px;
+}
+
+#nav>nav>img {
+    margin-bottom: 25%;
+}
+
+#nav>nav>ul {
+    list-style: none;
+}
+
+#nav>nav>ul>li {
+    margin-bottom: 8%;
+}
+
+#nav>nav>footer>p {
+    margin-top: 25%;
+    font-size: 12px
+}
+
+#nav>nav a:link {
+    text-decoration: none;
+    color: white;
+}
+
+#nav>nav a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+#nav>nav a:active {
+    text-decoration: none;
+    color: #0080FF;
+}
+
+#nav>nav a:hover {
+    text-decoration: none;
+    color: #0080FF;
+}
+
+#section {}
