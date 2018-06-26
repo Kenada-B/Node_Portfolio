@@ -1,12 +1,5 @@
-var express = require('express'); <<
-<< << < HEAD
+var express = require('express');
 
-
-    ===
-    === =
-    //
-    >>>
-    >>> > passport_mysql
 var router = express.Router();
 
 router.route('/').get(function(req, res) {
