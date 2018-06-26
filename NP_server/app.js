@@ -1,4 +1,5 @@
-require('./mysql/mysql_init')();
+var mysqlInit = require('./mysql/mysql_init');
+mysqlInit.mysqlInit();
 console.log("mysql 서버 가동");
 
 var httpsConfig = require('./httpsConfig/httpsConfig');
