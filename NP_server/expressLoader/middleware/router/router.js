@@ -10,6 +10,8 @@ router.route('/').get(function(req, res) {
     })
 })
 
+require('./r_P_M')(router);
+
 module.exports = {
     F_router: {
         path: '/',
