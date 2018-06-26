@@ -1,6 +1,12 @@
-var express = require('express');
+var express = require('express'); <<
+<< << < HEAD
 
 
+    ===
+    === =
+    //
+    >>>
+    >>> > passport_mysql
 var router = express.Router();
 
 router.route('/').get(function(req, res) {
@@ -11,7 +17,7 @@ router.route('/').get(function(req, res) {
     })
 })
 
-
+require('./r_P_M')(router);
 
 module.exports = {
     F_router: {

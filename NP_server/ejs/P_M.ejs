@@ -1,0 +1,128 @@
+<% include ./HeaderFooter/Header.ejs %>
+<%
+    if(loginErr.length!==0){
+%>
+    <script>alert("<%=loginErr%>");</script>
+<%
+    }
+%>
+<div id="section" class="col">
+    <div class="container">
+    <section>
+        <article id="login_article">
+<%
+    if(sessionId){
+%>
+        <div class="row">
+            <div class="col-md-10">
+                <p style="text-align:right;">
+                <span style="font-size:25px"><%=sessionId.id%></span>
+                님 반갑습니다.</p>
+            </div>
+            <div class="col-md-">
+                <form name="logout_form" method="GET" action="/logout">
+                    <button type='submit' class="btn btn-primary" >로그아웃</button>
+                </form>
+            </div>
+        <div>
+<%
+    }else{
+%>
+        <div class="row">
+            <div class="col-md-11">
+            <form name="local_login" method="post" action="/local_login">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-0">
+                            <label for="id">ID:</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" name="id" placeholder="Enter your 'ID' ex) maru" />
+                        </div>
+                        <div class="col-md-0">
+                            <label for="pw">PW:</label>
+                        </div>
+                        <div class="col">
+                            <input type="password" class="form-control" name="pw" placeholder="Enter you 'PW' ex)1234" />
+                        </div>
+                        <div class="col-md-">
+                            <button type="submit" class="btn btn-primary">로그인</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="col-md-1">
+            <form name="local_login" method="get" action="/facebook_login">
+                <button type="submit" class="btn btn-primary"><i class="fab fa-facebook" style="font-size:20px"></i>&nbsp;&nbsp;로그인</button>
+            </form>
+            </div>
+        </div>
+<%
+    }
+%>
+        </article>
+        <hr>
+        <article id="board_article">
+        <div class="row">
+            <div class="col">
+            <table id="board_table" class="table table-striped">
+            <thead class="thead-dark"> 
+            <tr>
+                <th>글번호</th>
+                <th>글제목</th>
+                <th>글쓴시각</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+
+            <tr>
+                <td>1</td>
+                <td>첫 번째 게시글</td>
+                <td>2018-06-24 00:00</td>
+                <td>4</td>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+
+            </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            <nav id="pagenation" >
+                <ul class="pagination" >
+                    <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">6</a></li>
+                    <li class="page-item"><a class="page-link" href="#">7</a></li>
+                    <li class="page-item"><a class="page-link" href="#">8</a></li>
+                    <li class="page-item"><a class="page-link" href="#">9</a></li>
+                    <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+                </ul>
+            </nav>
+            </div>
+        </div>
+        </article>
+    </section>
+    </div>
+</div>
+<link rel="stylesheet" href="./static/P_M.css">
+
+<% include ./HeaderFooter/Footer.ejs %>

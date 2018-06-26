@@ -1,0 +1,48 @@
+@charset "utf-8";
+section label {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+section>#login_article {
+    padding-top: 50px;
+    padding-left: 5%;
+}
+
+section>hr {
+    width: 110%;
+}
+
+section>#board_article {
+    padding-top: 40px;
+    margin-left: 10%;
+}
+
+#board_table {
+    width: 90%;
+}
+
+#board_table th {
+    text-align: center;
+}
+
+section #board_table td:nth-child(1) {
+    width: 100px;
+    text-align: center;
+}
+
+section #board_table td:nth-child(3) {
+    width: 200px;
+    text-align: center;
+}
+
+section #board_table td:nth-child(4) {
+    width: 100px;
+    text-align: center;
+}
+
+#pagenation {
+    padding-top: 20px;
+    position: absolute;
+    left: 30%
+}
