@@ -8,7 +8,7 @@ module.exports = {
             host: 'localhost',
             user: 'webtest',
             password: 'qwer1234!',
-            database: 'user',
+            database: 'potfolio_db',
             charset: 'utf8',
             connectionLimit: 10
         })

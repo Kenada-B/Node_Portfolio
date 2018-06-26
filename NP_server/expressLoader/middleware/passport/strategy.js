@@ -10,6 +10,7 @@ passport.use('local-login', new LocalStrategy({
 }, function(req, id, pw, done) {
     mysql.getUserinfo(id, pw, (err, result) => {
         if (err) {
+            console.log(err);
             return done(null, false, req.flash('login-fail', 'ID 또는 PW가 일치하지 않습니다.'))
         }
         userInfo = { id: id };

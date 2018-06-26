@@ -3,7 +3,7 @@ middlewares = {
     static: require('./static'),
     bodyParser: require('./bodyParser'),
     session: require('./session'),
-
+    passport: require('./passport/passport_init'),
     router: require('./router/router'),
 }
 
