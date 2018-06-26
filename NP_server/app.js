@@ -1,3 +1,6 @@
+require('./mysql/mysql_init')();
+console.log("mysql 서버 가동");
+
 var httpsConfig = require('./httpsConfig/httpsConfig');
 var expressLoader = require('./expressLoader/expressLoader')
 var https = require('https');
