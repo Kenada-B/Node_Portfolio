@@ -37,13 +37,13 @@
                             <label for="id">ID:</label>
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" name="id" placeholder="Enter your 'ID' ex) maru" />
+                            <input type="text" class="form-control" name="id" placeholder="Enter your 'ID' ex) maru" required/>
                         </div>
                         <div class="col-md-0">
                             <label for="pw">PW:</label>
                         </div>
                         <div class="col">
-                            <input type="password" class="form-control" name="pw" placeholder="Enter you 'PW' ex)1234" />
+                            <input type="password" class="form-control" name="pw" placeholder="Enter you 'PW' ex)1234" required/>
                         </div>
                         <div class="col-md-">
                             <button type="submit" class="btn btn-primary">로그인</button>
@@ -71,50 +71,75 @@
             <tr>
                 <th>글번호</th>
                 <th>글제목</th>
+                <th>작성자</th>
                 <th>글쓴시각</th>
                 <th>조회수</th>
             </tr>
             </thead>
-
+<%
+    contentList.forEach(function(contentEl){
+%>
             <tr>
-                <td>1</td>
-                <td>첫 번째 게시글</td>
-                <td>2018-06-24 00:00</td>
-                <td>4</td>
+                <td><%=contentEl.num%></td>
+                <td><a href="/board_view/<%=contentEl.num%>?page=<%=curPage%>"><%=unescape(contentEl.title)%></a></td>
+                <td><%=contentEl.userid%></td>
+<%
+        var mod_time=new Date(contentEl.mod_time);
+%>
+                <td><%=mod_time.getFullYear()%>
+                    -<%=mod_time.getMonth()+1%>
+                    -<%=mod_time.getDate()%>
+                    &nbsp;<%=mod_time.getHours()%>
+                    :<%=mod_time.getMinutes()%></td>
+                <td><%=contentEl.view_num%></td>
             </tr>
-
-            <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
-
-            <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
-
+<%
+    })
+%>
             </table>
             </div>
         </div>
         <div class="row">
+            <div class="col-md-1">
+                <a href="/board-write" class="btn btn-primary" style="margin-top:20px">글쓰기</a>
+            </div>
             <div class="col">
             <nav id="pagenation" >
                 <ul class="pagination" >
-                    <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">6</a></li>
-                    <li class="page-item"><a class="page-link" href="#">7</a></li>
-                    <li class="page-item"><a class="page-link" href="#">8</a></li>
-                    <li class="page-item"><a class="page-link" href="#">9</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+<%
+    var totalPage = pagenation[0].count%10===0?pagenation[0].count/10:pagenation[0].count+1;
+    var printPageNum=9;
+    var currentPage=parseInt(curPage);
+    var startPage=0;
+    if(currentPage-4<=0){
+        startPage=1;
+    }else if(currentPage+4>totalPage){
+        startPage=totalPage-(printPageNum-1);
+    }else{
+        startPage=currentPage-4;
+    }
+    var endPage=0;
+    if(totalPage<printPageNum||currentPage+4>totalPage){
+        endPage=totalPage;
+    }else{
+        endPage=startPage+8;
+    }
+%>
+                    <li class="page-item"><a class="page-link" href="/passport_mysql/<%=currentPage-1===0?currentPage=1:currentPage-1%>">&lt;</a></li>
+<%
+    for(var i=startPage;i<=endPage;i++){
+        if(i===currentPage){
+%>
+                    <li class="page-item active"><a class="page-link"><%=i%></a></li>
+<%
+        }else{
+%>
+                    <li class="page-item"><a class="page-link" href="/passport_mysql/<%=i%>"><%=i%></a></li>
+<%
+        }
+    }
+%>
+                    <li class="page-item"><a class="page-link" href="/passport_mysql/<%=currentPage+1>endPage?currentPage=endPage:currentPage+1%>">&gt;</a></li>
                 </ul>
             </nav>
             </div>

@@ -1,9 +1,20 @@
 var static = require("serve-static");
-var path = require("path");
 
 module.exports = {
     F_static: {
         path: "",
+        middleware: static("ejs")
+    },
+    F_static1: {
+        path: "/passport_mysql",
+        middleware: static("ejs")
+    },
+    F_static2: {
+        path: "/board_view/",
+        middleware: static("ejs")
+    },
+    F_static3: {
+        path: "/board-modify",
         middleware: static("ejs")
     }
 }

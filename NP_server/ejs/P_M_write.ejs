@@ -1,0 +1,60 @@
+<% include ./HeaderFooter/Header.ejs %>
+
+<div id="section" class="col">
+    <div class="container">
+    <section>
+        <article style="margin-top:10%;">
+        <div class="row">
+            <form method="POST" action="<%=mod==='write'?'/board-writeAction':'/board-contentModify/'+content[0].num%>?page=<%=pagenum%>">
+                <div class="row">
+                    <div class='col-md-'>
+                        <label for="title" style="margin-left:46px;font-size:25px;" >제목</label>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" name="title" class="form-control" size="85" required value="<%=mod==='write'?'':content[0].title%>">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" style="width:30px">
+                        <label for="content" style="margin-left:30px;font-size:25px;">내용</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <textarea name="content" rows="15" class="form-control" required style="resize:none;width:670px;margin-left:30px"><%=mod==='write'?'':content[0].content%></textarea>
+                    </div>
+                </div>
+<%
+    if(mod==="write"){
+%>
+                <div class="row" style="margin-top:30px;">
+                    <div class='col-md-' style="margin-left:540px">
+                        <button type="submit" class="btn btn-primary">글쓰기</button>
+                    </div>
+                    <div class="col">
+                        <a href="/passport_mysql" class="btn btn-primary">목록보기</a>
+                    </div>
+                </div>
+<%
+    }else{
+%>
+                <div class="row" style="margin-top:30px;">
+                    <div class='col-md-' style="margin-left:540px">
+                        <button type="submit" class="btn btn-primary">수정하기</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" onclick="javascript:history.go(-1)" class="btn btn-primary">돌아가기</button>
+                    </div>
+                </div>
+<%
+    }
+%>
+
+            </form>
+        </div>
+        </article>
+    </section>
+    </div>
+</div>
+
+<% include ./HeaderFooter/Footer.ejs %>

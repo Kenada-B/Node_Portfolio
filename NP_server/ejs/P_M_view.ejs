@@ -1,0 +1,136 @@
+<% include ./HeaderFooter/Header.ejs %>
+
+<div id="section" class="col">
+    <div class="container">
+    <section>
+        <article style="margin-top:10%;">
+        <div class="row">
+            <div class="col">
+            <table class="table table-striped">
+                <thead class="thead-dark" align="center">
+                    <th>글제목 : <%=content[0].title%></th>
+                </thead>
+                <tr>
+                    <td align="right" style="font-size:13px">
+                        작성자 : <%=content[0].userid%>
+                        / 글쓴 시각 : <%=content[0].mod_time.getFullYear()%>
+                            -<%=content[0].mod_time.getMonth()+1%>
+                            -<%=content[0].mod_time.getDate()%>
+                            &nbsp;<%=content[0].mod_time.getHours()%>
+                            :<%=content[0].mod_time.getMinutes()%>
+                        / 조회수 : <%=content[0].view_num%></td>
+                </tr>
+                <tr>
+                    <td style="padding:30px"><%=content[0].content%></td>
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" align="right">
+<%
+    if(sessionId.id===-1){
+    }else if(content[0].userid===sessionId.id){    
+%>
+                <div style="display:inline">
+                    <button class="btn btn-success" onclick="javascript:location.href='/board-modify/<%=content[0].num%>?page=<%=pagenum%>'">수   정</button>
+                    <button class="btn btn-danger" onclick="javascript:location.href='/board-contentDelete/<%=content[0].num%>'">삭   제</button>
+                </div>
+<%
+    }
+%>
+                <button class="btn btn-primary" onclick="javascript:location.href='/passport_mysql/<%=pagenum%>'">목록으로</button>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            <table class="table table-bordered">
+                <tr>
+                    <td colspan="3">
+                        <form id="comment_form" method="POST" action="/board-commentAction/<%=content[0].num%>">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <textarea id="comment" name="comment" rows="4" class="form-control" style="resize:none;width:110%;margin-left:15px"></textarea>
+                                </div>
+                                <div class="col-md-3" align="center">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="button" onclick="javascript:commentSubmit()" class="btn btn-primary" style="height:110px">덧글 쓰기</button>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+<%
+    comment.forEach(function(commentEl){
+%>
+                <tr>
+                    <td style="width:100px">
+                        <span style="font-size:25px"><%=commentEl.userid%></span><br>
+                        <span style="font-size:13px">
+                            작성시간:
+                            <%=commentEl.mod_time.getFullYear()%>
+                            -<%=commentEl.mod_time.getMonth()+1%>
+                            -<%=commentEl.mod_time.getDate()%>
+                            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <%=commentEl.mod_time.getHours()%>
+                            :<%=commentEl.mod_time.getMinutes()%>
+                        </span>
+                    </td>
+                    <td><div id='<%=commentEl.num%>_modiable_textarea'><%=commentEl.comment%></div></td>
+                    <td style="width:120px"><div id='<%=commentEl.num%>_modiable_button'>
+<%
+    if(sessionId.id===-1){
+    }else if(commentEl.userid===sessionId.id){
+%>
+                        <button type="button" class="btn btn-success" style="width:120px;height:50px" onclick="javascript:mod_comment('#<%=commentEl.num%>_modiable_textarea','#<%=commentEl.num%>_modiable_button',<%=commentEl.num%>)">수  정</button>
+                        <div style="height:10px"></div>
+                        <button type="button" class="btn btn-danger" style="width:120px;height:50px" onclick="javascript:location.href='/board-commentDelete/<%=commentEl.num%>'">삭  제</button>
+
+<%
+    }
+%>
+                    </td>
+                </tr>
+<%
+    })
+%>
+            </table>
+            </div>
+        </div>
+        </article>
+    </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+function commentSubmit(){
+    var text=$('#comment').val();
+    if(text===''){
+        alert('한 자 이상 입력해 주세요');
+    }else{
+        $('#comment_form').submit();
+        $('#comment').val("");
+    }
+}
+
+function mod_comment(modTA, modBT, commentNum){
+    var temp_text=$(modTA).text();
+    $(modTA).html(  '<form id="mod_comment_form' +commentNum+ '" method="POST" action="/board-commentUpdate/'+commentNum+'">'+
+                    '<textarea id="mod_comment" name="mod_comment" rows="4" class="form-control" style="resize:none;width:95%;margin-left:15px">'+
+                    temp_text+
+                    "</textarea></form>");
+
+    $(modBT).html('<button type="button" class="btn btn-success" style="width:120px;height:50px" onclick=javascript:mod_commentSubmit("#mod_comment_form'+commentNum+'")>수  정</button>'
+                    +'<div style="height:10px"></div>'
+                    +'<button type="button" class="btn btn-danger" style="width:120px;height:50px" onclick="javascript:location.reload();">취  소</button>'
+                );
+    
+}
+
+function mod_commentSubmit(mod_comment_form){
+    $(mod_comment_form).submit();
+}
+
+</script>
+
+<% include ./HeaderFooter/Footer.ejs %>
