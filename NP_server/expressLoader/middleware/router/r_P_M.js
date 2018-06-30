@@ -47,7 +47,7 @@ module.exports = function(router) {
             res.redirect("/login-fail");
             return;
         }
-        context = { title: "passport_mysql_write", mod: "write" }
+        context = { title: "passport_mysql_write", mod: "write", pagenum: 1 }
         res.render('P_M_write', context, function(err, html) {
             res.writeHead(200, { 'Content-type': 'text/html; utf8' });
             res.end(html);
