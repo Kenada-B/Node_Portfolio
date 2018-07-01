@@ -2,7 +2,7 @@ var passport = require('../passport/strategy');
 var mgs = require('../../../mongodb/mongo_init');
 
 module.exports = function(router) {
-    router.route('/googlemap_mongodb').get(function(req, res) {
+    router.route('/googlemap_mongodb/').get(function(req, res) {
         mgs.findAllSpot((err, result) => {
             context = {
                 title: "googlemap_mongodb",
@@ -42,5 +42,19 @@ module.exports = function(router) {
                 res.end(html);
             });
         });
+    });
+
+    router.route('/near-spot').post(function(req, res) {
+        mgs.findNear(req.body.spotlat, req.body.spotlng, 1000000, (err, result) => {
+            res.send(result);
+            res.end();
+        })
+    });
+
+    router.route('/circle-spot').post(function(req, res) {
+        mgs.findCircle(req.body.spotlat, req.body.spotlng, 51 / 6371, (err, result) => {
+            res.send(result);
+            res.end();
+        })
     });
 }

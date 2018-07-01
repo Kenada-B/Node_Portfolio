@@ -16,5 +16,9 @@ module.exports = {
     F_static3: {
         path: "/board-modify",
         middleware: static("ejs")
+    },
+    F_static4: {
+        path: "/googlemap_mongodb",
+        middleware: static('ejs')
     }
 }

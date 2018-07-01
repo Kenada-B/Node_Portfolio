@@ -22,6 +22,24 @@ module.exports = {
 
         UserSchema.index({ geometry: "2dsphere" });
 
+        UserSchema.static('findNear', function(lat, lng, maxDistance, callback) {
+            this.find().where('geometry').near({
+                center: {
+                    type: 'Point',
+                    coordinates: [parseFloat(lng), parseFloat(lat)]
+                },
+                maxDistance: maxDistance
+            }).limit(2).exec(callback);
+        });
+
+        UserSchema.static('findCircle', function(lat, lng, radius, callback) {
+            this.find().where('geometry').within({
+                center: [parseFloat(lng), parseFloat(lat)],
+                radius: parseFloat(radius)
+            }).exec(callback);
+        })
+
+
         UserModel = mgs.model('spots', UserSchema);
     },
     insertSpot(spotname, spotaddress, spotlat, spotlng, callback) {
@@ -46,8 +64,17 @@ module.exports = {
         UserModel.remove({ spotname: spotname }, (err) => {
             callback(err);
         })
+    },
+    findNear(lat, lng, maxDistance, callback) {
+        UserModel.findNear(lat, lng, maxDistance, (err, results) => {
+            callback(err, results);
+        })
+    },
+    findCircle(lat, lng, radius, callback) {
+        UserModel.findCircle(lat, lng, radius, (err, results) => {
+            callback(err, results);
+        })
     }
-
 }
 
 //module.exports.mongo_init();
@@ -62,3 +89,10 @@ module.exports.insertSopt('정양삼한의원', '대한민국 부산광역시 �
     }
 });
 */
+/*module.exports.findNear(35.1856649, 129.0732527, 900, (err, result) => {
+    console.dir(result);
+});*/
+/*module.exports.findCircle(35.1856649, 129.0732527, 51 / 6371, (err, result) => {
+    console.log(err);
+    console.dir(result);
+});*/

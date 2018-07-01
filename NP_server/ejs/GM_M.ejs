@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col">
                     <div id="print_map" style="width:90%;height:500px;margin-left:7%; margin-top:60px"></div>
-                    <input type="text" id="map_input" class="form-control" placeholder="건물명을 입력해 주세요" style="width:60%;margin-left:20%;margin-top:20px"/>
+                    <input type="text" id="map_input" class="form-control" placeholder="건물명을 입력 후 핀을 클릭해 주세요" style="width:60%;margin-left:20%;margin-top:20px"/>
                 </div>
             </div>
             <div class="row">
@@ -17,8 +17,8 @@
 <%
     spotlist.forEach(function(spot,index){
 %>
-                        <a class="list-group-item">
-                            <div id="<%=index+1%>">
+                        <a class="list-group-item" id="<%=index+1%>">
+                            <div>
                                 <div class="row">
                                     <div class="col-md-10">
                                         <div class="row">
@@ -50,11 +50,15 @@
     </section>
     </div>
 </div>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdIBzeQq4KHRG6qQji4X1zOgKsK0qagbE&libraries=places" type="text/javascript"></script>
 <script type="text/javascript">
 var lat=<%=spotlat%>;
 var lng=<%=spotlng%>;
 var infoContent;
+
+var nearspot;
+var circlespot;
 
 function print_map(){
 
@@ -69,9 +73,60 @@ function print_map(){
     var input = document.getElementById('map_input');
     var searchBox = new google.maps.places.SearchBox(input);
 
+    if(nearspot){
+        var nerspotPoint=new google.maps.LatLng(nearspot.geometry.coordinates[1], nearspot.geometry.coordinates[0]);
+        var nearSpot=new google.maps.Marker({
+            map:map,
+            position:nerspotPoint
+        })
+        nearSpot.addListener('click', function() {
+            nearinfowindow.open(map, nearSpot);
+        });
+        var nearinfowindow = new google.maps.InfoWindow({
+            content:"<span style='font-weight:bold; font-size:larger'>"+nearspot.spotname+"</span>"+"<br>"
+                        +nearspot.spotaddress+"<br><br>"
+                        +"위도 : " + nearspot.geometry.coordinates[1] + "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;"
+                        +"경도 : " + nearspot.geometry.coordinates[0]
+        });
+    }
+
+    if(circlespot){
+        var circlespotPoints=[];
+        var circlespotMarkers=[];
+
+        circlespot.forEach(function(spot,index){
+            circlespotPoints[index]=new google.maps.LatLng(spot.geometry.coordinates[1], spot.geometry.coordinates[0])
+        })
+
+        circlespotPoints.forEach(function(LatLng, index){
+            circlespotMarkers[index]=new google.maps.Marker({
+                map:map,
+                position:LatLng
+            })
+        })
+
+        circlespotMarkers.forEach(function(circleMarker, index){
+            circleMarker.addListener('click', function() {
+                circleinfowindow.open(map, circleMarker);
+            });
+            var circleinfowindow = new google.maps.InfoWindow({
+                content:"<span style='font-weight:bold; font-size:larger'>"+circlespot[index].spotname+"</span>"+"<br>"
+                            +circlespot[index].spotaddress+"<br><br>"
+                            +"위도 : " + circlespot[index].geometry.coordinates[1] + "&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;"
+                            +"경도 : " + circlespot[index].geometry.coordinates[0]
+            });
+        })
+    }
+
     var entrySpot=new google.maps.Marker({
         map: map,
         position: initCenter
+    });
+    entrySpot.addListener('click', function() {
+        infowindow.open(map, entrySpot);
+    });
+    var infowindow = new google.maps.InfoWindow({
+        content:infoContent
     });
 
     map.addListener('bounds_changed', function() {
@@ -135,10 +190,55 @@ function print_map(){
 }
 google.maps.event.addDomListener(window, 'load', print_map);
 
-$("#1").click(function(){
-    alert("test");
-});
+<%
+    spotlist.forEach(function(spot,index){
+%>
+    $("#<%=index+1%>").click(function(){
+        lat=<%=spot.geometry.coordinates[1]%>
+        lng=<%=spot.geometry.coordinates[0]%>
+        infoContent="<span style='font-weight:bold; font-size:larger'><%=spot.spotname%></span>"+"<br>"
+                +"<%=spot.spotaddress%><br><br>"
+                +"위도 : <%=spot.geometry.coordinates[1]%>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;"
+                +"경도 : <%=spot.geometry.coordinates[0]%>"
+                +"<div align='right'><button type='button' onfocus='javascript:circleSpot(<%=spot.geometry.coordinates[1]%>, <%=spot.geometry.coordinates[0]%>);loadCircleSpotMarker()' id='circleBtn' class='btn btn-info btn-sm'>반경 안의 장소 찾기</button>&nbsp&nbsp;"
+                +"<button type='button' onfocus='javascript:nearSpot(<%=spot.geometry.coordinates[1]%>, <%=spot.geometry.coordinates[0]%>);loadNearSpotMarker()' id='nearBtn' class='btn btn-success btn-sm'>가까운 장소 찾기</button></div>"
+        nearspot=undefined;
+        circlespot=undefined;
+    });
+    var favoritSpot<%=index+1%> = document.getElementById('<%=index+1%>');
+    google.maps.event.addDomListener(favoritSpot<%=index+1%>, 'click', print_map);
+<%
+    })
+%>
+
+function nearSpot(lat, lng){
+    circlespot=undefined;
+    $.post('/near-spot', {spotlat:lat, spotlng:lng}, function(data){
+        nearspot=data[1];
+    });       
+}
+function loadNearSpotMarker(){
+    var nearBtn = document.getElementById('nearBtn');
+    google.maps.event.addDomListener(nearBtn, 'click', print_map);
+}
+
+function circleSpot(lat, lng){
+    nearspot=undefined;
+    $.post('/circle-spot', {spotlat:lat, spotlng:lng}, function(data){
+        data.forEach(function(spot,index){
+            if(spot.geometry.coordinates[1]==lat&&spot.geometry.coordinates[0]==lng){
+                data.splice(index,1);
+                return
+            }
+        });
+        circlespot=data;
+    });       
+}
+function loadCircleSpotMarker(){
+    var nearBtn = document.getElementById('circleBtn');
+    google.maps.event.addDomListener(circleBtn, 'click', print_map);
+}
 
 </script>
-
 <% include ./HeaderFooter/Footer.ejs %>
+
