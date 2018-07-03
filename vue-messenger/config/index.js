@@ -38,11 +38,11 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../../NP_server/ejs/V_template.ejs'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsRoot: path.resolve(__dirname, '../../NP_server/ejs'),
+    assetsSubDirectory: 'vue-static',
     assetsPublicPath: '/',
 
     /**

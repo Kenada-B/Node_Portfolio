@@ -1,11 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import commList from './commList'
 
 Vue.use(Vuex);
 
 var store = new Vuex.Store({
     state: {
-        userlist: ['U s e r 1', 'U s e r 2']
+        userlist: [{
+            name: 'U s e r 1',
+            commid: 'user1'
+        }, {
+            name: 'U s e r 2',
+            commid: 'user2'
+        }]
+    },
+    modules: {
+        commlist: commList
     }
 })
 
