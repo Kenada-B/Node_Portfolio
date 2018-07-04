@@ -10,6 +10,8 @@ var httpsConfig = require('./httpsConfig/httpsConfig');
 var expressLoader = require('./expressLoader/expressLoader')
 var https = require('https');
 
-https.createServer(httpsConfig.sslOption, expressLoader).listen(httpsConfig.port, httpsConfig.host, function() {
+var server = https.createServer(httpsConfig.sslOption, expressLoader).listen(httpsConfig.port, httpsConfig.host, function() {
     console.log('expressServer httpS 실행됨 - port : ' + httpsConfig.port);
 });
+
+require('./socket.io/socketIo_init')(server);

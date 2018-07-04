@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>User1 macro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script>
+        var options = {
+            'forceNew': true
+        };
+        var url = 'https://192.168.0.11:3001';
+        socket = io.connect(url, options);
+
+        socket.on('connect', function() {});
+
+        socket.emit('login', {
+            id: 'user1'
+        });
+
+        socket.on('message', function(data) {
+            console.log(data);
+            data.sender = "user1"
+            data.receiver = "maru"
+            data.message = data.message + "\n user1's Echo response"
+            socket.emit('message', data);
+        });
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

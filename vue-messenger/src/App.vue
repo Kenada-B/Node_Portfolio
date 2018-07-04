@@ -9,7 +9,7 @@
           <router-link :to="{name:'messageroom-list'}"><font-awesome-icon icon="comments" />대화목록</router-link>
         </td>
       <tr>
-        <td colspan="2">
+        <td id="list" valign="top" colspan="2">
           <transition name="slide-fade" mode="out-in">
             <router-view/>
           </transition>    
@@ -21,7 +21,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created(){
+    this.$store.dispatch("connect",{socekt:""})
+    this.$store.state.logininfo.socket.emit('login',{
+      id:this.$store.state.logininfo.id
+    })
+  },
 }
 </script>
 
@@ -29,6 +35,7 @@ export default {
   #app-main{
     border:1px solid #333333;
     border-collapse: collapse;
+    width:390px;
   }
 
   .main-menu{
@@ -37,7 +44,6 @@ export default {
     height:60px;
     font-size:30px;
     color:white;
-    width:300px;
   }
 
   .main-menu>a:link { color: white; text-decoration: none;}
@@ -53,6 +59,9 @@ export default {
   {
     transform: translateX(10px);
     opacity: 0;
+  }
+  #list{
+    height:600px;
   }
 
 </style>
