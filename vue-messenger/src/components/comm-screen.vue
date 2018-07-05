@@ -3,7 +3,7 @@
         <div id="bg">
             <div id="messagelist">
                 <template v-for="(message) in getMessageList">
-                    <p :class="specifyMyMessage(message.sender)">{{message.message}}</p>
+                    <p :class="specifyMyMessage(message.sender)" v-html="message.message"></p>
                 </template>
             </div>
             <b-form-textarea id="messageinput"
@@ -24,9 +24,16 @@
 export default{
     created(){
         var created_this=this;
-        created_this.getSocket.on('message',function(data){
-            created_this.$store.commit('addMessagelog',{message:data});    
-        });        
+        if(created_this.$route.params.commName.startsWith("everyone")){
+            created_this.getSocket.emit('enterRoom');
+            created_this.getSocket.on("sendGroup",function(data){
+                created_this.$store.commit('addMessagelog',{message:data});
+            })
+        }else{
+            created_this.getSocket.on('message',function(data){
+                created_this.$store.commit('addMessagelog',{message:data});    
+            });   
+        } 
     },
     data(){
         return {
@@ -60,8 +67,13 @@ export default{
                 sendtime:Date.now(),
                 roomid:this.$route.params.commName
             }
-            this.getSocket.emit('message', data);
-            this.$store.commit('addMessagelog',{message:data})
+            
+            if(this.$route.params.commName.startsWith("everyone")){
+                this.getSocket.emit('RoomMessage', data);
+            }else{
+                this.getSocket.emit('message', data);
+                this.$store.commit('addMessagelog',{message:data})
+            }
             this.message='';
         },
         addMessage(data){
@@ -106,6 +118,7 @@ export default{
     clear:both;
     float:right;
     padding:5px;
+    margin-left:40px;
 
 }
 .FriendMessage{
@@ -114,5 +127,6 @@ export default{
     clear:both;
     float:left;
     padding:5px;
+    margin-right:40px;
 }
 </style>

@@ -21,9 +21,20 @@
             console.log(data);
             data.sender = "user1"
             data.receiver = "maru"
-            data.message = data.message + "\n user1's Echo response"
+            data.message = data.message + "<br/>user1's Echo response"
             socket.emit('message', data);
         });
+
+        socket.emit('enterRoom');
+
+        socket.on('sendGroup', function(data) {
+            console.log(data);
+            if (data.sender === 'maru') {
+                data.sender = "user1"
+                data.message = data.message + "<br/>user1's Group Echo response"
+                socket.emit('RoomMessage', data);
+            }
+        })
     </script>
 </head>
 

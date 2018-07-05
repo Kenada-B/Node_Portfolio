@@ -14,5 +14,14 @@ module.exports = function(server) {
         socket.on('message', function(data) {
             io.sockets.connected[ids[data.receiver]].emit('message', data);
         })
+
+        //room을 인터페이스 조작 없이 서버에서 바로 생성
+        var roomId = 'everyone1';
+        socket.on("enterRoom", function(data) {
+            socket.join(roomId)
+        })
+        socket.on("RoomMessage", function(data) {
+            io.sockets.in(data.roomid).emit('sendGroup', data);
+        })
     })
 }

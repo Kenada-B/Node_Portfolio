@@ -9,6 +9,11 @@ export default {
             name: "User2님과 대화",
             id: "user2",
             commlog: []
+        },
+        everyone1: {
+            name: "maru,User1,User2그룹대화",
+            id: 'everyone1',
+            commlog: []
         }
     },
     mutations: {
