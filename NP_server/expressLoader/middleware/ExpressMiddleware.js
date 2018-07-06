@@ -6,6 +6,7 @@ middlewares = {
     session: require('./session'),
     passport: require('./passport/passport_init'),
     router: require('./router/router'),
+    nuxt: require('./nuxt'),
 }
 
 module.exports = function(app) {

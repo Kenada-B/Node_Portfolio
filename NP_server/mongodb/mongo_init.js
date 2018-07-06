@@ -9,7 +9,7 @@ var UserModel;
 
 module.exports = {
     mongo_init() {
-        mgs.connect(databaseUrl);
+        mgs.connect(databaseUrl, { useNewUrlParser: true });
 
         UserSchema = mgs.Schema({
             spotname: { type: String, required: true, unique: true },

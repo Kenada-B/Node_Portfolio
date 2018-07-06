@@ -13,6 +13,7 @@ router.route('/').get(function(req, res) {
 require('./r_P_M')(router);
 require('./r_GM_M')(router);
 require('./r_V_S')(router);
+require('./r_V_N')(router);
 
 module.exports = {
     F_router: {
