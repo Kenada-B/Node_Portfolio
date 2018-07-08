@@ -8,6 +8,7 @@
         <td class="main-menu">
           <router-link :to="{name:'messageroom-list'}"><font-awesome-icon icon="comments" />대화목록</router-link>
         </td>
+      </tr>
       <tr>
         <td id="list" valign="top" colspan="2">
           <transition name="slide-fade" mode="out-in">
@@ -26,8 +27,17 @@ export default {
     this.$store.dispatch("connect",{socekt:""})
     this.$store.state.logininfo.socket.emit('login',{
       id:this.$store.state.logininfo.id
-    })
-  },
+    });
+
+    var created_this=this;
+    created_this.$store.state.logininfo.socket.on("sendGroup",function(data){
+      created_this.$store.commit('addMessagelog',{message:data});
+    });
+
+    created_this.$store.state.logininfo.socket.on('message',function(data){
+      created_this.$store.commit('addMessagelog',{message:data});
+    });
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 var { Nuxt, Builder } = require('nuxt')
 
-var isProd; // = (process.env.NODE_ENV === 'production');
+var isProd = (process.env.NODE_ENV === 'production');
 
 var config = require('../../nuxt.config.js');
 config.dev = !isProd;

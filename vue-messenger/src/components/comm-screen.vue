@@ -26,14 +26,7 @@ export default{
         var created_this=this;
         if(created_this.$route.params.commName.startsWith("everyone")){
             created_this.getSocket.emit('enterRoom');
-            created_this.getSocket.on("sendGroup",function(data){
-                created_this.$store.commit('addMessagelog',{message:data});
-            })
-        }else{
-            created_this.getSocket.on('message',function(data){
-                created_this.$store.commit('addMessagelog',{message:data});    
-            });   
-        } 
+        }
     },
     data(){
         return {
@@ -75,9 +68,6 @@ export default{
                 this.$store.commit('addMessagelog',{message:data})
             }
             this.message='';
-        },
-        addMessage(data){
-            this.$store.commit('addMessagelog',{message:data});
         },
         specifyMyMessage(who){
             if(who===this.$store.state.logininfo.id){

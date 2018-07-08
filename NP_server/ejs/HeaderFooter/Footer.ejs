@@ -9,13 +9,13 @@
 $(document).ready(function(){
 	var isChanged=false;
 
-	if($(window).outerWidth()<=960){
+	if($(window).outerWidth()<=1300){
 		isChanged=true;
 		changeScreenHarf();
 	}
 
 	$(window).resize(function() {
-		if($(window).outerWidth()<=960){
+		if($(window).outerWidth()<=1300){
 		
 			if(isChanged===false){
 				isChanged=true;

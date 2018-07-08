@@ -38,12 +38,12 @@ export default {
     this.mounted = true
   },
   created () {
-    console.error(this.error)
+    
   },
   watch: {
     error(newErr) {
       if(newErr) {
-        console.error(newErr)
+        
       }
     }
   },
