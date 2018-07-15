@@ -2,7 +2,7 @@ var socketIo = require('socket.io');
 
 module.exports = function(server) {
     io = socketIo.listen(server);
-    console.log("Socket.IO 서버 가동");
+    console.log("Socket.IO Server init");
 
     var ids = {};
 

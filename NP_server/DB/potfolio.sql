@@ -12,7 +12,7 @@ CREATE TABLE board (
   title varchar(60) not null,
   content varchar(400) not null,
   userid varchar(10) not null,
-  mod_time timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP
+  mod_time timestamp DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   view_num int DEFAULT '1'
 )ENGINE=InnoDB;
 

@@ -8,7 +8,7 @@
             <div class="col">
             <table class="table table-striped">
                 <thead class="thead-dark" align="center">
-                    <th>글제목 : <%=content[0].title%></th>
+                    <th>글제목 : <%=unescape(content[0].title)%></th>
                 </thead>
                 <tr>
                     <td align="right" style="font-size:13px">
@@ -21,7 +21,7 @@
                         / 조회수 : <%=content[0].view_num%></td>
                 </tr>
                 <tr>
-                    <td style="padding:30px"><%=content[0].content%></td>
+                    <td style="padding:30px"><%=unescape(content[0].content)%></td>
                 </tr>
             </table>
             </div>
@@ -76,7 +76,7 @@
                             :<%=commentEl.mod_time.getMinutes()%>
                         </span>
                     </td>
-                    <td><div id='<%=commentEl.num%>_modiable_textarea'><%=commentEl.comment%></div></td>
+                    <td><div id='<%=commentEl.num%>_modiable_textarea'><%=unescape(commentEl.comment)%></div></td>
                     <td style="width:120px"><div id='<%=commentEl.num%>_modiable_button'>
 <%
     if(sessionId.id===-1){

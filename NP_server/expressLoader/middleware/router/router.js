@@ -10,6 +10,14 @@ router.route('/').get(function(req, res) {
     })
 })
 
+router.route('/introduction').get(function(req, res) {
+    context = { title: "introduction" }
+    res.render('introduction', context, function(err, html) {
+        res.writeHead(200, { 'Content-type': 'text/html; utf8' });
+        res.end(html);
+    })
+})
+
 require('./r_P_M')(router);
 require('./r_GM_M')(router);
 require('./r_V_S')(router);

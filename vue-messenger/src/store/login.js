@@ -12,7 +12,7 @@ export default {
     },
     actions: {
         "connect": (store, payload) => {
-            var io = socketCli('https://192.168.0.11:3001', { 'forceNew': true });
+            var io = socketCli('https://52.78.23.26', { 'forceNew': true });
             payload.socket = io;
             store.commit("connect", payload);
         }

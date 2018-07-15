@@ -107,7 +107,12 @@
             <nav id="pagenation" >
                 <ul class="pagination" >
 <%
-    var totalPage = pagenation[0].count%10===0?pagenation[0].count/10:pagenation[0].count+1;
+	var totalPage;
+	if(pagenation[0].count<=10){
+		totalPage=1;
+	}else{
+		totalPage=pagenation[0].count%10===0?pagenation[0].count/10:parseInt(pagenation[0].count/10)+1;
+	}
     var printPageNum=9;
     var currentPage=parseInt(curPage);
     var startPage=0;

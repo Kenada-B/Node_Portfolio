@@ -39,8 +39,8 @@
         <li class="de-title">DB</li>
         <li style="list-style-type: none;">
           <ul>
-            <li>Mysql - v5.7.22</li>
-            <li>MongoDB - v2.6.10</li>
+            <li>Amazon RDS Mysql - v5.7.21</li>
+            <li>MongoDB - v3.2.6</li>
           </ul>
         </li>
         <br>

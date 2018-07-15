@@ -5,14 +5,15 @@ var pool;
 module.exports = {
     mysqlInit() {
         pool = mysql.createPool({
-            host: 'localhost',
-            user: 'webtest',
+            host: 'marudb.ckkge0fproo1.ap-northeast-2.rds.amazonaws.com',
+            user: 'node_pot',
             password: 'qwer1234!',
             database: 'potfolio_db',
             charset: 'utf8',
             connectionLimit: 10,
             multipleStatements: true
         })
+		pool.query("set time_zone = 'Asia/Seoul'",function(err, results, fields) {});
     },
     getUserinfo(userid, userpw, callback) {
         pool.query('select ?? from user where userid=? and userpw=password(?)', ['userid', userid, userpw], function(err, results, fields) {
