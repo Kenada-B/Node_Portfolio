@@ -16,3 +16,7 @@
   
      **개인키 발급** : openssl genrsa 1024 > key.pem  
      **인증서 발급** : openssl req -x509 -new -key key.pem > cert.pem
+
+ - 구동 OS : VMware ubuntu server 16.04LTS (개발서버)
+ - Node.js Version : v8.11.1
+ - 웹 프레임워크 : Express Framework
