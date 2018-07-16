@@ -12,6 +12,7 @@
      유지보수 및 설정을 용이하게 만들었습니다.
 
 **ETC**
-\- HTTPS 서버를 위해 인증서와 키 발급을 'Ubuntu Server'에서 **openssl**명령어를 이용하여 발급했습니다.
+  - HTTPS 서버를 위해 인증서와 키 발급을 'Ubuntu Server'에서 **openssl**명령어를 이용하여 발급했습니다.
+  
      **개인키 발급** : openssl genrsa 1024 > key.pem  
      **인증서 발급** : openssl req -x509 -new -key key.pem > cert.pem
