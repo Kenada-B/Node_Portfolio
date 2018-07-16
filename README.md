@@ -12,7 +12,7 @@
 디자인의 영감은
  - Facebook
  - Bootstrap4
- - Start Bootstrap - Resume
+ - Start Bootstrap - Resume(https://startbootstrap.com/template-overviews/resume/)
  
 사이트에서 받았습니다. 
 
