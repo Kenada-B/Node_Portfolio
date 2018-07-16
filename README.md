@@ -12,4 +12,4 @@
 
 **ETC**
 
--  Vue UI Framework : 2.6(개발서버에서 사용)
+-  Vue UI Framework : vue-bootstrap
