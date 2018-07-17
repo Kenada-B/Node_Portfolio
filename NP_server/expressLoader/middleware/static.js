@@ -2,7 +2,7 @@ var Serve_static = require("serve-static");
 
 module.exports = {
     F_static: {
-        path: "",
+        path: "/",
         middleware: Serve_static("ejs")
     },
     F_static1: {

@@ -11,7 +11,7 @@
                         <label for="title" style="margin-left:46px;font-size:25px;" >제목</label>
                     </div>
                     <div class="col-md-10">
-                        <input type="text" name="title" class="form-control" size="85" required value="<%=mod==='write'?'':content[0].title%>">
+                        <input type="text" name="title" class="form-control" size="85" required value="<%=mod==='write'?'':unescape(content[0].title)%>">
                     </div>
                 </div>
                 <div class="row">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <textarea name="content" rows="15" class="form-control" required style="resize:none;width:670px;margin-left:30px"><%=mod==='write'?'':content[0].content%></textarea>
+                        <textarea name="content" rows="15" class="form-control" required style="resize:none;width:670px;margin-left:30px"><%=mod==='write'?'':unescape(content[0].content)%></textarea>
                     </div>
                 </div>
 <%

@@ -17,7 +17,7 @@
 <%
     spotlist.forEach(function(spot,index){
 %>
-                        <a class="list-group-item" id="<%=index+1%>">
+                        <a class="list-group-item item-hover" id="<%=index+1%>">
                             <div>
                                 <div class="row">
                                     <div class="col-md-10">
@@ -50,6 +50,14 @@
     </section>
     </div>
 </div>
+
+<style>
+	.item-hover:hover{
+		cursor:pointer;
+		background:#a0a0a0;
+	}
+</style>
+
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdIBzeQq4KHRG6qQji4X1zOgKsK0qagbE&libraries=places" type="text/javascript"></script>
 <script type="text/javascript">
